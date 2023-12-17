@@ -46,7 +46,7 @@ else:
     run_id = int(runs[-1].split('_')[-1]) + 1 if runs else 0
 
 save_dir = os.path.join(save_dir_root, 'run', 'run_' + str(run_id))
-modelName = 'C3D' # Options: C3D or R2Plus1D or R3D
+modelName = 'ConvNext' # Options: C3D or R2Plus1D or R3D
 saveName = modelName + '-' + dataset
 
 def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=lr,
@@ -56,7 +56,10 @@ def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=
             num_classes (int): Number of classes in the data
             num_epochs (int, optional): Number of epochs to train for.
     """
-
+    if modelName == 'ConvNext':
+        model = ConvNext3D.ConvNext_xtiny(num_classes=num_classes, pretrained=True)
+        train_params = [{'params': C3D_model.get_1x_lr_params(model), 'lr': lr},
+                        {'params': C3D_model.get_10x_lr_params(model), 'lr': lr * 10}]
     if modelName == 'C3D':
         model = C3D_model.C3D(num_classes=num_classes, pretrained=True)
         train_params = [{'params': C3D_model.get_1x_lr_params(model), 'lr': lr},
