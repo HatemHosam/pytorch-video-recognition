@@ -57,9 +57,9 @@ def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=
             num_epochs (int, optional): Number of epochs to train for.
     """
     if modelName == 'ConvNext':
-        model = ConvNext3D.ConvNext_xtiny(num_classes=num_classes, pretrained=True)
-        train_params = [{'params': C3D_model.get_1x_lr_params(model), 'lr': lr},
-                        {'params': C3D_model.get_10x_lr_params(model), 'lr': lr * 10}]
+        model = ConvNext3D.convnext_xtiny()
+        train_params = [{'params': ConvNext3D.get_1x_lr_params(model), 'lr': lr},
+                        {'params': ConvNext3D.get_10x_lr_params(model), 'lr': lr * 10}]
     if modelName == 'C3D':
         model = C3D_model.C3D(num_classes=num_classes, pretrained=True)
         train_params = [{'params': C3D_model.get_1x_lr_params(model), 'lr': lr},
