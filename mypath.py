@@ -6,7 +6,7 @@ class Path(object):
             root_dir = '/data/i5O/UCF-101'
 
             # Save preprocess data into output_dir
-            output_dir = '/path/to/VAR/ucf101'
+            output_dir = '/data/i5O/post_process/UCF-101'
 
             return root_dir, output_dir
         elif database == 'hmdb51':
