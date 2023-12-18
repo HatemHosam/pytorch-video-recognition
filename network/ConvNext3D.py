@@ -17,7 +17,7 @@ class Block(nn.Module):
     """
     def __init__(self, dim, drop_path=0., layer_scale_init_value=1e-6):
         super().__init__()
-        self.dwconv = nn.Conv3d(dim, dim, kernel_size=(7,7,7), padding=(3,3,3), groups=dim) # depthwise conv
+        self.dwconv = nn.Conv3d(dim, dim, kernel_size=(7,7,1), padding=(3,3,1), groups=dim) # depthwise conv
         self.norm = LayerNorm(dim, eps=1e-6)
         self.pwconv1 = nn.Linear(dim, 4 * dim) # pointwise/1x1 convs, implemented with linear layers
         self.act = nn.GELU()
