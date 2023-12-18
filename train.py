@@ -13,6 +13,7 @@ from torch.autograd import Variable
 
 from dataloaders.dataset import VideoDataset
 from network import C3D_model, R2Plus1D_model, R3D_model, ConvNext3D
+from torchsummary import summary
 
 # Use GPU if available else revert to CPU
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
