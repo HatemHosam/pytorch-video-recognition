@@ -30,7 +30,7 @@ class VideoDataset(Dataset):
         # The following three parameters are chosen as described in the paper section 4.1
         self.resize_height = 128
         self.resize_width = 171
-        self.crop_size = 114
+        self.crop_size = 112
 
         if not self.check_integrity():
             raise RuntimeError('Dataset not found or corrupted.' +
