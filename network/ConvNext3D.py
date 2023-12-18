@@ -132,32 +132,26 @@ class LayerNorm(nn.Module):
             x = self.weight[:, None, None, None] * x + self.bias[:, None, None, None]
             return x
 
-@register_model
 def convnext_xtiny(**kwargs):
     model = ConvNeXt(depths=[2, 2, 2, 2], dims=[96, 192, 384, 768], **kwargs)
     return model
 
-@register_model
 def convnext_tiny(**kwargs):
     model = ConvNeXt(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], **kwargs)
     return model
 
-@register_model
 def convnext_small(**kwargs):
     model = ConvNeXt(depths=[3, 3, 27, 3], dims=[96, 192, 384, 768], **kwargs)
     return model
 
-@register_model
 def convnext_base(**kwargs):
     model = ConvNeXt(depths=[3, 3, 27, 3], dims=[128, 256, 512, 1024], **kwargs)
     return model
 
-@register_model
 def convnext_large(**kwargs):
     model = ConvNeXt(depths=[3, 3, 27, 3], dims=[192, 384, 768, 1536], **kwargs)
     return model
 
-@register_model
 def convnext_xlarge(**kwargs):
     model = ConvNeXt(depths=[3, 3, 27, 3], dims=[256, 512, 1024, 2048], **kwargs)
     return model
