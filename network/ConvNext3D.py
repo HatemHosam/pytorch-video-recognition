@@ -133,7 +133,7 @@ class LayerNorm(nn.Module):
             return x
 
 def convnext_xtiny(**kwargs):
-    model = ConvNeXt(depths=[2, 2, 2, 1], dims=[96, 192, 384, 768], **kwargs)
+    model = ConvNeXt(depths=[2, 2, 2, 2], dims=[96, 192, 384, 768], **kwargs)
     return model
 
 def convnext_tiny(**kwargs):
