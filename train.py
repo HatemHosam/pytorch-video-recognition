@@ -13,7 +13,6 @@ from torch.autograd import Variable
 
 from dataloaders.dataset import VideoDataset
 from network import C3D_model, R2Plus1D_model, R3D_model, ConvNext3D
-from torchsummary import summary
 
 # Use GPU if available else revert to CPU
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -61,7 +60,6 @@ def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=
         model = ConvNext3D.convnext_xtiny()
         #train_params = [{'params': ConvNext3D.get_1x_lr_params(model), 'lr': lr},
         #                {'params': ConvNext3D.get_10x_lr_params(model), 'lr': lr * 10}]
-        summary(model, (3,128,172,16))
     elif modelName == 'C3D':
         model = C3D_model.C3D(num_classes=num_classes, pretrained=True)
         train_params = [{'params': C3D_model.get_1x_lr_params(model), 'lr': lr},
