@@ -216,7 +216,7 @@ class VideoDataset(Dataset):
         frame_count = len(frames)
         buffer = np.empty((frame_count, self.resize_height, self.resize_width, 3), np.dtype('float32'))
         for i, frame_name in enumerate(frames):
-            frame = np.array(cv2.imread(frame_name))).astype(np.float64)
+            frame = np.array(cv2.imread(frame_name)).astype(np.float64)
             buffer[i] = frame
 
         return buffer
