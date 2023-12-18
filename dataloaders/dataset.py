@@ -28,8 +28,8 @@ class VideoDataset(Dataset):
         self.split = split
 
         # The following three parameters are chosen as described in the paper section 4.1
-        self.resize_height = 128
-        self.resize_width = 171
+        self.resize_height = 224
+        self.resize_width = 224
         self.crop_size = 112
 
         if not self.check_integrity():
