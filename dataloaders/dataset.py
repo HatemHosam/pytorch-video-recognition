@@ -28,8 +28,8 @@ class VideoDataset(Dataset):
         self.split = split
 
         # The following three parameters are chosen as described in the paper section 4.1
-        self.resize_height = 128
-        self.resize_width = 171
+        self.resize_height = 224
+        self.resize_width = 224
         self.crop_size = 112
 
         if not self.check_integrity():
@@ -216,7 +216,7 @@ class VideoDataset(Dataset):
         frame_count = len(frames)
         buffer = np.empty((frame_count, self.resize_height, self.resize_width, 3), np.dtype('float32'))
         for i, frame_name in enumerate(frames):
-            frame = np.array(cv2.imread(frame_name)).astype(np.float64)
+            frame = np.array(cv2.resize(cv2.imread(frame_name), (224,224))).astype(np.float64)
             buffer[i] = frame
 
         return buffer
