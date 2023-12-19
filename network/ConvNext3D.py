@@ -38,7 +38,7 @@ class Block(nn.Module):
             x = self.gamma * x
         x = x.permute(0, 4, 1, 2, 3) # (N, H, W, Z, C) -> (N, C, H, W, Z)
 
-        # x = input + self.drop_path(x)
+        x = input + self.drop_path(x)
         return x
 
 class ConvNeXt(nn.Module):
