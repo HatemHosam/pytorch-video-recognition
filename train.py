@@ -118,6 +118,8 @@ def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=
             # or being validated. Primarily affects layers such as BatchNorm or Dropout.
             if phase == 'train':
                 # scheduler.step() is to be called once every epoch during training
+                optimizer.step()
+                scheduler.step()
                 model.train()
             else:
                 model.eval()
@@ -140,8 +142,6 @@ def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=
 
                 if phase == 'train':
                     loss.backward()
-                    optimizer.step()
-                    scheduler.step()
 
                 running_loss += loss.item() * inputs.size(0)
                 running_corrects += torch.sum(preds == labels.data)
