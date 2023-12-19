@@ -57,7 +57,7 @@ def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=
             num_epochs (int, optional): Number of epochs to train for.
     """
     if modelName == 'ConvNext':
-        model = ConvNext3D.convnext_xtiny()
+        model = ConvNext3D.convnext_tiny()
         #train_params = [{'params': ConvNext3D.get_1x_lr_params(model), 'lr': lr},
         #                {'params': ConvNext3D.get_10x_lr_params(model), 'lr': lr * 10}]
     elif modelName == 'C3D':
