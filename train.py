@@ -61,7 +61,7 @@ def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=
         #train_params = [{'params': ConvNext3D.get_1x_lr_params(model), 'lr': lr},
         #                {'params': ConvNext3D.get_10x_lr_params(model), 'lr': lr * 10}]
     elif modelName == 'C3D':
-        model = C3D_model.C3D(num_classes=num_classes, pretrained=True)
+        model = C3D_model.C3D(num_classes=num_classes, pretrained=False)
         train_params = [{'params': C3D_model.get_1x_lr_params(model), 'lr': lr},
                         {'params': C3D_model.get_10x_lr_params(model), 'lr': lr * 10}]
     elif modelName == 'R2Plus1D':
