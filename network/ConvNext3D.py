@@ -38,7 +38,7 @@ class Block(nn.Module):
             x = self.gamma * x
         x = x.permute(0, 4, 1, 2, 3) # (N, Z, H, W, C) -> (N, C, Z, H, W)
 
-        # x = input + self.drop_path(x)
+        x = input + self.drop_path(x)
         return x
 
 class ConvNeXt(nn.Module):
@@ -61,7 +61,7 @@ class ConvNeXt(nn.Module):
 
         self.downsample_layers = nn.ModuleList() # stem and 3 intermediate downsampling conv layers
         stem = nn.Sequential(
-            nn.Conv3d(in_chans, dims[0], kernel_size=(4,4,4), stride=(4,4,4)),
+            nn.Conv3d(in_chans, dims[0], kernel_size=(4,4,1), stride=(4,4,1)),
             LayerNorm(dims[0], eps=1e-6, data_format="channels_first")
         )
         self.downsample_layers.append(stem)
