@@ -22,7 +22,7 @@ nEpochs = 100  # Number of epochs for training
 resume_epoch = 0  # Default is 0, change if want to resume
 useTest = True # See evolution of the test set when training
 nTestInterval = 20 # Run on test set every nTestInterval epochs
-snapshot = 50 # Store a model every snapshot epochs
+snapshot = 10 # Store a model every snapshot epochs
 lr = 1e-3 # Learning rate
 
 dataset = 'ucf101' # Options: hmdb51 or ucf101
@@ -46,7 +46,7 @@ else:
     run_id = int(runs[-1].split('_')[-1]) + 1 if runs else 0
 
 save_dir = os.path.join(save_dir_root, 'run', 'run_' + str(run_id))
-modelName = 'ConvNext' # Options: C3D or R2Plus1D or R3D
+modelName = 'C3D' #'ConvNext' # Options: C3D or R2Plus1D or R3D
 saveName = modelName + '-' + dataset
 
 def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=lr,
