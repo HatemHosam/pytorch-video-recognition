@@ -6,8 +6,8 @@ from timm.models.registry import register_model
 
 class Block(nn.Module):
     r""" ConvNeXt Block. There are two equivalent implementations:
-    (1) DwConv -> LayerNorm (channels_first) -> 1x1 Conv -> GELU -> 1x1 Conv; all in (N, C, H, W, Z)
-    (2) DwConv -> Permute to (N, H, W, Z, C); LayerNorm (channels_last) -> Linear -> GELU -> Linear; Permute back
+    (1) DwConv -> LayerNorm (channels_first) -> 1x1 Conv -> GELU -> 1x1 Conv; all in (N, C, Z, H, W)
+    (2) DwConv -> Permute to (N, Z, H, W, C); LayerNorm (channels_last) -> Linear -> GELU -> Linear; Permute back
     We use (2) as we find it slightly faster in PyTorch
     
     Args:
@@ -29,14 +29,14 @@ class Block(nn.Module):
     def forward(self, x):
         input = x
         x = self.dwconv(x)
-        x = x.permute(0, 2, 3, 4, 1) # (N, C, H, W, Z) -> (N, H, W, Z, C)
+        x = x.permute(0, 2, 3, 4, 1) # (N, C, Z, H, W) -> (N, Z, H, W, C)
         x = self.norm(x)
         x = self.pwconv1(x)
         x = self.act(x)
         x = self.pwconv2(x)
         if self.gamma is not None:
             x = self.gamma * x
-        x = x.permute(0, 4, 1, 2, 3) # (N, H, W, Z, C) -> (N, C, H, W, Z)
+        x = x.permute(0, 4, 1, 2, 3) # (N, Z, H, W, C) -> (N, C, Z, H, W)
 
         x = input + self.drop_path(x)
         return x
