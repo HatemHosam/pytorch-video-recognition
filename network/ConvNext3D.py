@@ -54,7 +54,7 @@ class ConvNeXt(nn.Module):
         head_init_scale (float): Init scaling value for classifier weights and biases. Default: 1.
     """
     def __init__(self, in_chans=3, num_classes=101, #number of classes for UCF-101, Kinetics-700  
-                 depths=[2, 2, 4, 2], dims=[96, 192, 384, 768], drop_path_rate=0., 
+                 depths=[2, 2, 2, 2], dims=[96, 192, 384, 768], drop_path_rate=0., 
                  layer_scale_init_value=1e-6, head_init_scale=1.,
                  ):
         super().__init__()
@@ -68,7 +68,7 @@ class ConvNeXt(nn.Module):
         for i in range(3):
             downsample_layer = nn.Sequential(
                     LayerNorm(dims[i], eps=1e-6, data_format="channels_first"),
-                    nn.Conv3d(dims[i], dims[i+1], kernel_size=(2,2,2), stride=(2,2,2)),
+                    nn.Conv3d(dims[i], dims[i+1], kernel_size=(2,2,2), stride=(2,2,2), padding= (1,1,1)),
             )
             self.downsample_layers.append(downsample_layer)
 
