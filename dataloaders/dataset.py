@@ -109,7 +109,7 @@ class VideoDataset(Dataset):
                 video_name = os.path.join(os.path.join(self.output_dir, 'train', video_class, video),
                                     sorted(os.listdir(os.path.join(self.output_dir, 'train', video_class, video)))[0])
                 image = cv2.imread(video_name)
-                if np.shape(image)[0] != 128 or np.shape(image)[1] != 171:
+                if np.shape(image)[0] != 224 or np.shape(image)[1] != 224:
                     return False
                 else:
                     break
