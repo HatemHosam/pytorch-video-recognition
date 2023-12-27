@@ -127,7 +127,7 @@ class VideoDataset(Dataset):
             os.mkdir(os.path.join(self.output_dir, 'test'))
 
         # Split train/val/test sets
-        for file in os.listdir(self.root_dir):
+        for file in os.listdir(os.path.join(self.root_dir, 'train')):
             file_path = os.path.join(self.root_dir, file)
             video_files = [name for name in os.listdir(file_path)]
 
