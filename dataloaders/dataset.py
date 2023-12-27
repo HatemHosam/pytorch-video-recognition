@@ -36,7 +36,7 @@ class VideoDataset(Dataset):
             raise RuntimeError('Dataset not found or corrupted.' +
                                ' You need to download it from official website.')
 
-        if preprocess: #(not self.check_preprocess()) or preprocess:
+        if (not self.check_preprocess()) or preprocess:
             print('Preprocessing of {} dataset, this will take long, but it will be done only once.'.format(dataset))
             self.preprocess()
 
@@ -147,7 +147,7 @@ class VideoDataset(Dataset):
             #    os.mkdir(test_dir)
             
             for video in train:
-                self.process_video(video, file, train_dir)
+                self.process_video(video, 'train', file, train_dir)
 
             #for video in val:
             #    self.process_video(video, file, val_dir)
@@ -179,7 +179,7 @@ class VideoDataset(Dataset):
             #    self.process_video(video, file, train_dir)
 
             for video in val:
-                self.process_video(video, file, val_dir)
+                self.process_video(video, 'val', file, val_dir)
 
             #for video in test:
             #    self.process_video(video, file, test_dir)
@@ -211,22 +211,22 @@ class VideoDataset(Dataset):
             #    self.process_video(video, file, val_dir)
 
             for video in test:
-                self.process_video(video, file, test_dir)        
+                self.process_video(video, 'test',file, test_dir)        
 
         print('Preprocessing finished.')
 
-    def process_video(self, video, action_name, save_dir):
+    def process_video(self, subfolder, video, action_name, save_dir):
         # Initialize a VideoCapture object to read video data into a numpy array
         video_filename = video.split('.')[0]
         if not os.path.exists(os.path.join(save_dir, video_filename)):
             os.mkdir(os.path.join(save_dir, video_filename))
 
-        capture = cv2.VideoCapture(os.path.join(self.root_dir, action_name, video))
+        capture = cv2.VideoCapture(os.path.join(self.root_dir,subfolder, action_name, video))
         frame_count = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
         frame_width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
         frame_height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-        print(os.path.join(self.root_dir, action_name, video))
+        #print(os.path.join(self.root_dir, action_name, video))
         # Make sure splited video has at least 16 frames
         EXTRACT_FREQUENCY = 4
         if frame_count // EXTRACT_FREQUENCY <= 16:
@@ -249,7 +249,7 @@ class VideoDataset(Dataset):
                 if (frame_height != self.resize_height) or (frame_width != self.resize_width):
                     frame = cv2.resize(frame, (self.resize_width, self.resize_height))
                 w = cv2.imwrite(filename=os.path.join(save_dir, video_filename, '0000{}.jpg'.format(str(i))), img=frame)
-                print(w)
+                #print(w)
                 i += 1
             count += 1
 
