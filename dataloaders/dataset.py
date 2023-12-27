@@ -222,7 +222,6 @@ class VideoDataset(Dataset):
             os.mkdir(os.path.join(save_dir, video_filename))
 
         capture = cv2.VideoCapture(os.path.join(self.root_dir, action_name, video))
-        print(action_name)
         frame_count = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
         frame_width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
         frame_height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
