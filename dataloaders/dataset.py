@@ -145,7 +145,7 @@ class VideoDataset(Dataset):
             #    os.mkdir(val_dir)
             #if not os.path.exists(test_dir):
             #    os.mkdir(test_dir)
-
+            print(file_path)
             for video in train:
                 self.process_video(video, file, train_dir)
 
