@@ -147,7 +147,7 @@ class VideoDataset(Dataset):
             #    os.mkdir(test_dir)
             
             for video in train:
-                self.process_video(video, 'train', file, train_dir)
+                self.process_video('train',video, file, train_dir)
 
             #for video in val:
             #    self.process_video(video, file, val_dir)
@@ -179,7 +179,7 @@ class VideoDataset(Dataset):
             #    self.process_video(video, file, train_dir)
 
             for video in val:
-                self.process_video(video, 'val', file, val_dir)
+                self.process_video('val',video, file, val_dir)
 
             #for video in test:
             #    self.process_video(video, file, test_dir)
@@ -211,7 +211,7 @@ class VideoDataset(Dataset):
             #    self.process_video(video, file, val_dir)
 
             for video in test:
-                self.process_video(video, 'test',file, test_dir)        
+                self.process_video('test', video,file, test_dir)        
 
         print('Preprocessing finished.')
 
