@@ -21,16 +21,18 @@ print("Device being used:", device)
 nEpochs = 100  # Number of epochs for training
 resume_epoch = 0  # Default is 0, change if want to resume
 useTest = True # See evolution of the test set when training
-nTestInterval = 20 # Run on test set every nTestInterval epochs
+nTestInterval = 10 # Run on test set every nTestInterval epochs
 snapshot = 10 # Store a model every snapshot epochs
 lr = 1e-3 # Learning rate
 
-dataset = 'ucf101' # Options: hmdb51 or ucf101
+dataset = 'kinetics400' # Options: hmdb51 or ucf101 or kinetics400
 
 if dataset == 'hmdb51':
     num_classes=51
 elif dataset == 'ucf101':
     num_classes = 101
+elif dataset == 'kinetics400':
+    num_classes = 400
 else:
     print('We only implemented hmdb and ucf datasets.')
     raise NotImplementedError
