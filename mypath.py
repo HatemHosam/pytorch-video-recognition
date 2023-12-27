@@ -20,7 +20,7 @@ class Path(object):
             # folder that contains class labels
             root_dir = '/data/i5O/k400/videos'
 
-            output_dir = '/data/i5O/k400/videos'
+            output_dir = '/data/i5O/post_process/kinetics400'
 
             return root_dir, output_dir
         else:
