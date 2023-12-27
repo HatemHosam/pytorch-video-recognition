@@ -23,7 +23,7 @@ resume_epoch = 0  # Default is 0, change if want to resume
 useTest = True # See evolution of the test set when training
 nTestInterval = 10 # Run on test set every nTestInterval epochs
 snapshot = 10 # Store a model every snapshot epochs
-lr = 1e-3 # Learning rate
+lr = 1e-2 # Learning rate
 
 dataset = 'kinetics400' # Options: hmdb51 or ucf101 or kinetics400
 
