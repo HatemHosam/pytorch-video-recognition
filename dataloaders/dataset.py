@@ -226,7 +226,7 @@ class VideoDataset(Dataset):
         frame_width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
         frame_height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-        print(frame_count)
+        print(os.path.join(self.root_dir, action_name, video))
         # Make sure splited video has at least 16 frames
         EXTRACT_FREQUENCY = 4
         if frame_count // EXTRACT_FREQUENCY <= 16:
