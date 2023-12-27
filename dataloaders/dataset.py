@@ -36,7 +36,7 @@ class VideoDataset(Dataset):
             raise RuntimeError('Dataset not found or corrupted.' +
                                ' You need to download it from official website.')
 
-        if (not self.check_preprocess()) or preprocess:
+        if preprocess: #(not self.check_preprocess()) or preprocess:
             print('Preprocessing of {} dataset, this will take long, but it will be done only once.'.format(dataset))
             self.preprocess()
 
