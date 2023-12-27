@@ -128,31 +128,90 @@ class VideoDataset(Dataset):
 
         # Split train/val/test sets
         for file in os.listdir(os.path.join(self.root_dir, 'train')):
-            file_path = os.path.join(self.root_dir, file)
+            file_path = os.path.join(self.root_dir, 'train' , file)
             video_files = [name for name in os.listdir(file_path)]
 
-            train_and_valid, test = train_test_split(video_files, test_size=0.2, random_state=42)
-            train, val = train_test_split(train_and_valid, test_size=0.2, random_state=42)
+            #train_and_valid, test = train_test_split(video_files, test_size=0.2, random_state=42)
+            #train, val = train_test_split(train_and_valid, test_size=0.2, random_state=42)
 
+            train = os.listdir(os.path.join(self.root_dir, 'train'))
             train_dir = os.path.join(self.output_dir, 'train', file)
-            val_dir = os.path.join(self.output_dir, 'val', file)
-            test_dir = os.path.join(self.output_dir, 'test', file)
+            #val_dir = os.path.join(self.output_dir, 'val', file)
+            #test_dir = os.path.join(self.output_dir, 'test', file)
 
             if not os.path.exists(train_dir):
                 os.mkdir(train_dir)
-            if not os.path.exists(val_dir):
-                os.mkdir(val_dir)
-            if not os.path.exists(test_dir):
-                os.mkdir(test_dir)
+            #if not os.path.exists(val_dir):
+            #    os.mkdir(val_dir)
+            #if not os.path.exists(test_dir):
+            #    os.mkdir(test_dir)
 
             for video in train:
                 self.process_video(video, file, train_dir)
 
+            #for video in val:
+            #    self.process_video(video, file, val_dir)
+
+            #for video in test:
+            #    self.process_video(video, file, test_dir)
+        
+        for file in os.listdir(os.path.join(self.root_dir, 'val')):
+            file_path = os.path.join(self.root_dir, 'val' , file)
+            video_files = [name for name in os.listdir(file_path)]
+
+            #train_and_valid, test = train_test_split(video_files, test_size=0.2, random_state=42)
+            #train, val = train_test_split(train_and_valid, test_size=0.2, random_state=42)
+            
+            val = os.listdir(os.path.join(self.root_dir, 'val'))
+            #train_dir = os.path.join(self.output_dir, 'train', file)
+            
+            val_dir = os.path.join(self.output_dir, 'val', file)
+            #test_dir = os.path.join(self.output_dir, 'test', file)
+
+            #if not os.path.exists(train_dir):
+            #    os.mkdir(train_dir)
+            if not os.path.exists(val_dir):
+                os.mkdir(val_dir)
+            #if not os.path.exists(test_dir):
+            #    os.mkdir(test_dir)
+
+            #for video in train:
+            #    self.process_video(video, file, train_dir)
+
             for video in val:
                 self.process_video(video, file, val_dir)
 
+            #for video in test:
+            #    self.process_video(video, file, test_dir)
+        
+        for file in os.listdir(os.path.join(self.root_dir, 'test')):
+            file_path = os.path.join(self.root_dir, 'test' , file)
+            video_files = [name for name in os.listdir(file_path)]
+
+            #train_and_valid, test = train_test_split(video_files, test_size=0.2, random_state=42)
+            #train, val = train_test_split(train_and_valid, test_size=0.2, random_state=42)
+            
+            test = os.listdir(os.path.join(self.root_dir, 'test'))
+            #train_dir = os.path.join(self.output_dir, 'train', file)
+            
+            #val_dir = os.path.join(self.output_dir, 'val', file)
+            test_dir = os.path.join(self.output_dir, 'test', file)
+
+            #if not os.path.exists(train_dir):
+            #    os.mkdir(train_dir)
+            #if not os.path.exists(val_dir):
+            #    os.mkdir(val_dir)
+            if not os.path.exists(test_dir):
+                os.mkdir(test_dir)
+
+            #for video in train:
+            #    self.process_video(video, file, train_dir)
+
+            #for video in val:
+            #    self.process_video(video, file, val_dir)
+
             for video in test:
-                self.process_video(video, file, test_dir)
+                self.process_video(video, file, test_dir)        
 
         print('Preprocessing finished.')
 
