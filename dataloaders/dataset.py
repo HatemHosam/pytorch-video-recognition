@@ -21,15 +21,15 @@ class VideoDataset(Dataset):
             preprocess (bool): Determines whether to preprocess dataset. Default is False.
     """
 
-    def __init__(self, dataset='ucf101', split='train', clip_len=16, preprocess=False):
+    def __init__(self, dataset='kinetics400', split='train', clip_len=16, preprocess=False):
         self.root_dir, self.output_dir = Path.db_dir(dataset)
         folder = os.path.join(self.output_dir, split)
         self.clip_len = clip_len
         self.split = split
 
         # The following three parameters are chosen as described in the paper section 4.1
-        self.resize_height = 128
-        self.resize_width = 171
+        self.resize_height = 224
+        self.resize_width = 224
         self.crop_size = 112
 
         if not self.check_integrity():
@@ -65,6 +65,12 @@ class VideoDataset(Dataset):
         elif dataset == 'hmdb51':
             if not os.path.exists('dataloaders/hmdb_labels.txt'):
                 with open('dataloaders/hmdb_labels.txt', 'w') as f:
+                    for id, label in enumerate(sorted(self.label2index)):
+                        f.writelines(str(id+1) + ' ' + label + '\n')
+
+        elif dataset == 'kinetics400':
+            if not os.path.exists('dataloaders/kinetics400_labels.txt'):
+                with open('dataloaders/kinetics_labels.txt', 'w') as f:
                     for id, label in enumerate(sorted(self.label2index)):
                         f.writelines(str(id+1) + ' ' + label + '\n')
 
@@ -244,7 +250,7 @@ class VideoDataset(Dataset):
 
 if __name__ == "__main__":
     from torch.utils.data import DataLoader
-    train_data = VideoDataset(dataset='ucf101', split='test', clip_len=8, preprocess=False)
+    train_data = VideoDataset(dataset='kinetics400', split='test', clip_len=8, preprocess=False)
     train_loader = DataLoader(train_data, batch_size=100, shuffle=True, num_workers=4)
 
     for i, sample in enumerate(train_loader):
