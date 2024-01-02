@@ -306,7 +306,7 @@ class VideoDataset(Dataset):
         try:
             time_index = np.random.randint(buffer.shape[0] - clip_len)
         except: 
-            print(buffer.shape)
+            print(buffer.shape, clip_len)
 
         # Randomly select start indices in order to crop the video
         height_index = np.random.randint(buffer.shape[1] - crop_size)
