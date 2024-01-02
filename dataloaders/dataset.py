@@ -283,11 +283,11 @@ class VideoDataset(Dataset):
         buffer = np.empty((frame_count, self.resize_height, self.resize_width, 3), np.dtype('float32'))
         global last_frame
         last_frame = np.zeros((224,224,3), dtype= np.float64)
-        if frame_count == self.clip_len:
+        if frame_count >= self.clip_len:
             for i, frame_name in enumerate(frames):
                 frame = np.array(cv2.imread(frame_name)).astype(np.float64)
                 buffer[i] = frame
-        else:
+        elif (frame_count < self.clip_len) and (frame_count > 0):
             for i, frame_name in enumerate(frames):
                 frame = np.array(cv2.imread(frame_name)).astype(np.float64)
                 buffer[i] = frame
@@ -295,6 +295,9 @@ class VideoDataset(Dataset):
             for i in range(self.clip_len - frame_count, self.clip_len):
                 frame = last_frame
                 buffer[i] = frame
+        else: 
+            for i in range(self.clip_len):
+                buffer[i] = np.zeros((224,224,3), dtype= np.float64)
 
         return buffer
 
