@@ -85,6 +85,7 @@ class VideoDataset(Dataset):
             buffer = self.crop(buffer, self.clip_len, self.crop_size)
         except: 
             print((self.fnames[index]))
+            continue
         labels = np.array(self.label_array[index])
 
         if self.split == 'test':
