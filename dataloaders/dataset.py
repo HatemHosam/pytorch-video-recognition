@@ -292,7 +292,7 @@ class VideoDataset(Dataset):
                 frame = np.array(cv2.imread(frame_name)).astype(np.float64)
                 buffer[i] = frame
                 last_frame = frame
-            for i in range(self.clip_len - frame_count, self.clip_len):
+            for i in range(self.clip_len - frame_count, self.clip_len -1):
                 frame = last_frame
                 buffer[i] = frame
         else: 
