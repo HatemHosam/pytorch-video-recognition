@@ -285,8 +285,8 @@ class VideoDataset(Dataset):
         frames = sorted([os.path.join(file_dir, img) for img in os.listdir(file_dir)])
         frame_count = len(frames)
         buffer = np.empty((frame_count, self.resize_height, self.resize_width, 3), np.dtype('float32'))
-        last_frame = np.zeros((224,224,3), dtype= np.float64)
         global last_frame
+        last_frame = np.zeros((224,224,3), dtype= np.float64)
         if frame_count == self.clip_len:
             for i, frame_name in enumerate(frames):
                 frame = np.array(cv2.imread(frame_name)).astype(np.float64)
