@@ -314,9 +314,8 @@ class VideoDataset(Dataset):
         # the entire array, so each frame is cropped in the same location. The temporal
         # jitter takes place via the selection of consecutive frames
         buffer = buffer[time_index:time_index + clip_len,
-                 height_index:height_index + crop_size,
-                 width_index:width_index + crop_size, :]
-        buffer = cv2.resize(buffer, (224,224))
+                 :,:,:]#height_index:height_index + crop_size,
+                 #width_index:width_index + crop_size, :]
 
         return buffer
 
