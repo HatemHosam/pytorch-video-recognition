@@ -81,7 +81,7 @@ class VideoDataset(Dataset):
     def __getitem__(self, index):
         # Loading and preprocessing.
         buffer = self.load_frames(self.fnames[index])
-        if (buffer.shape[0] - self.clip_len) > 0
+        if (buffer.shape[0] - self.clip_len) > 0:
             buffer = self.crop(buffer, self.clip_len, self.crop_size)
         labels = np.array(self.label_array[index])
 
