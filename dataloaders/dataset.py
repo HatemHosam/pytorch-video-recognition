@@ -81,7 +81,8 @@ class VideoDataset(Dataset):
     def __getitem__(self, index):
         # Loading and preprocessing.
         buffer = self.load_frames(self.fnames[index])
-        buffer = self.crop(buffer, self.clip_len, self.crop_size)
+        if (buffer.shape[0] - self.clip_len) > 0
+            buffer = self.crop(buffer, self.clip_len, self.crop_size)
         labels = np.array(self.label_array[index])
 
         if self.split == 'test':
@@ -303,10 +304,7 @@ class VideoDataset(Dataset):
 
     def crop(self, buffer, clip_len, crop_size):
         # randomly select time index for temporal jittering
-        try:
-            time_index = np.random.randint(buffer.shape[0] - clip_len)
-        except: 
-            print(buffer.shape, clip_len)
+        time_index = np.random.randint(buffer.shape[0] - clip_len)
 
         # Randomly select start indices in order to crop the video
         height_index = np.random.randint(buffer.shape[1] - crop_size)
