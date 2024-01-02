@@ -98,7 +98,7 @@ def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=
     writer = SummaryWriter(log_dir=log_dir)
 
     print('Training model on {} dataset...'.format(dataset))
-    train_dataloader = DataLoader(VideoDataset(dataset=dataset, split='train',clip_len=16), batch_size=40, shuffle=True, num_workers=32)
+    train_dataloader = DataLoader(VideoDataset(dataset=dataset, split='train',clip_len=16), batch_size=40, shuffle=True, num_workers=16)
     val_dataloader   = DataLoader(VideoDataset(dataset=dataset, split='val',  clip_len=16), batch_size=40, num_workers=8)
     test_dataloader  = DataLoader(VideoDataset(dataset=dataset, split='test', clip_len=16), batch_size=40, num_workers=8)
 
