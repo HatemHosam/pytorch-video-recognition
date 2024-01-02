@@ -280,7 +280,7 @@ class VideoDataset(Dataset):
     def load_frames(self, file_dir):
         frames = sorted([os.path.join(file_dir, img) for img in os.listdir(file_dir)])
         frame_count = len(frames)
-        buffer = np.empty((self.clip_len, self.resize_height, self.resize_width, 3), np.dtype('float32'))
+        buffer = np.empty((np.max(self.clip_len,frame_count), self.resize_height, self.resize_width, 3), np.dtype('float32'))
         global last_frame
         last_frame = np.zeros((224,224,3), dtype= np.float64)
         if frame_count >= self.clip_len:
