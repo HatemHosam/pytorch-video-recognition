@@ -99,7 +99,7 @@ def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=
 
     print('Training model on {} dataset...'.format(dataset))
     train_dataloader = DataLoader(VideoDataset(dataset=dataset, split='train',clip_len=16), batch_size=40, shuffle=True, num_workers=16)
-    val_dataloader   = DataLoader(VideoDataset(dataset=dataset, split='val',  clip_len=16), batch_size=40, num_workers=16
+    val_dataloader   = DataLoader(VideoDataset(dataset=dataset, split='val',  clip_len=16), batch_size=40, num_workers=16)
     test_dataloader  = DataLoader(VideoDataset(dataset=dataset, split='test', clip_len=16), batch_size=40, num_workers=16)
 
     trainval_loaders = {'train': train_dataloader, 'val': val_dataloader}
