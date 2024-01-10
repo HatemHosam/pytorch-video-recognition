@@ -19,7 +19,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print("Device being used:", device)
 
 nEpochs = 100  # Number of epochs for training
-resume_epoch = 0  # Default is 0, change if want to resume
+resume_epoch = 10  # Default is 0, change if want to resume
 useTest = True # See evolution of the test set when training
 nTestInterval = 10 # Run on test set every nTestInterval epochs
 snapshot = 10 # Store a model every snapshot epochs
