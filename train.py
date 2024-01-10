@@ -19,10 +19,10 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print("Device being used:", device)
 
 nEpochs = 100  # Number of epochs for training
-resume_epoch = 10  # Default is 0, change if want to resume
+resume_epoch = 0  # Default is 0, change if want to resume
 useTest = True # See evolution of the test set when training
 nTestInterval = 10 # Run on test set every nTestInterval epochs
-snapshot = 10 # Store a model every snapshot epochs
+snapshot = 5 # Store a model every snapshot epochs
 lr = 1e-2 # Learning rate
 
 dataset = 'kinetics400' # Options: hmdb51 or ucf101 or kinetics400
@@ -98,9 +98,9 @@ def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=
     writer = SummaryWriter(log_dir=log_dir)
 
     print('Training model on {} dataset...'.format(dataset))
-    train_dataloader = DataLoader(VideoDataset(dataset=dataset, split='train',clip_len=16), batch_size=32, shuffle=True, num_workers=16)
-    val_dataloader   = DataLoader(VideoDataset(dataset=dataset, split='val',  clip_len=16), batch_size=32, num_workers=16)
-    test_dataloader  = DataLoader(VideoDataset(dataset=dataset, split='test', clip_len=16), batch_size=32, num_workers=16)
+    train_dataloader = DataLoader(VideoDataset(dataset=dataset, split='train',clip_len=16), batch_size=40, shuffle=True, num_workers=24)
+    val_dataloader   = DataLoader(VideoDataset(dataset=dataset, split='val',  clip_len=16), batch_size=40, num_workers=24)
+    test_dataloader  = DataLoader(VideoDataset(dataset=dataset, split='test', clip_len=16), batch_size=40, num_workers=24)
 
     trainval_loaders = {'train': train_dataloader, 'val': val_dataloader}
     trainval_sizes = {x: len(trainval_loaders[x].dataset) for x in ['train', 'val']}
