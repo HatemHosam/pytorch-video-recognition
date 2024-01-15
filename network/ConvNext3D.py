@@ -131,25 +131,6 @@ class LayerNorm(nn.Module):
             x = (x - u) / torch.sqrt(s + self.eps)
             x = self.weight[:, None, None, None] * x + self.bias[:, None, None, None]
             return x
-def get_1x_lr_params(model):
-    """
-    This generator returns all the parameters for the conv layer of the net.
-    """
-    b = [model.Block]
-    for i in range(len(b)):
-        for k in b[i].parameters():
-            if k.requires_grad:
-                yield k
-
-def get_10x_lr_params(model):
-    """
-    This generator returns all the parameters for the fc layer of the net.
-    """
-    b = [model.linear]
-    for j in range(len(b)):
-        for k in b[j].parameters():
-            if k.requires_grad:
-                yield k
 
 def convnext_xtiny(**kwargs):
     model = ConvNeXt(depths=[2, 2, 2, 2], dims=[96, 192, 384, 768], **kwargs)
