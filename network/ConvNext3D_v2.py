@@ -155,6 +155,7 @@ class ConvNeXtV2(nn.Module):
 
     def forward(self, x):
         x = self.forward_features(x)
+        x = self.head(x)
         return x
 
 def convnext_xtiny(**kwargs):
