@@ -12,7 +12,7 @@ from torch.utils.data import DataLoader
 from torch.autograd import Variable
 
 from dataloaders.dataset import VideoDataset
-from network import C3D_model, R2Plus1D_model, R3D_model, ConvNext3D, ConvNext3Dv2
+from network import C3D_model, R2Plus1D_model, R3D_model, ConvNext3D, ConvNext3D_v2
 
 # Use GPU if available else revert to CPU
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -59,7 +59,7 @@ def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=
             num_epochs (int, optional): Number of epochs to train for.
     """
     if modelName == 'ConvNextv2':
-        model = ConvNext3Dv2.convnext_xtiny()
+        model = ConvNext3D_v2.convnext_xtiny()
         
     if modelName == 'ConvNext':
         model = ConvNext3D.convnext_tiny()
@@ -101,7 +101,7 @@ def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=
     writer = SummaryWriter(log_dir=log_dir)
 
     print('Training model on {} dataset...'.format(dataset))
-    train_dataloader = DataLoader(VideoDataset(dataset=dataset, split='train',clip_len=16), batch_size=40, shuffle=True, num_workers=20)
+    train_dataloader = DataLoader(VideoDataset(dataset=dataset, split='train',clip_len=16), batch_size=64, shuffle=True, num_workers=20)
     val_dataloader   = DataLoader(VideoDataset(dataset=dataset, split='val',  clip_len=16), batch_size=40, num_workers=20)
     test_dataloader  = DataLoader(VideoDataset(dataset=dataset, split='test', clip_len=16), batch_size=40, num_workers=20)
 
