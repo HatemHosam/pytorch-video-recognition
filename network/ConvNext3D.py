@@ -161,5 +161,6 @@ def test():
     net = convnext_xtiny()
     x = torch.randn(1, 3, 224, 224, 100)
     y = net(x).cuda()
-    print(y.shape)
+    print(net)
+test()
     
