@@ -62,7 +62,7 @@ def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=
         model = ConvNext3D_v2.convnext_xtiny()
         
     elif modelName == 'ConvNext':
-        model = ConvNext3D.convnext_tiny()
+        model = ConvNext3D.convnext_xtiny()
         #train_params = [{'params': ConvNext3D.get_1x_lr_params(model), 'lr': lr},
         #                {'params': ConvNext3D.get_10x_lr_params(model), 'lr': lr * 10}]
     elif modelName == 'C3D':
