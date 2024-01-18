@@ -161,6 +161,6 @@ def test():
     net = convnext_xtiny()
     x = torch.randn(1, 3, 224, 224, 100)
     y = net(x).cuda()
-    print(net)
+    print('Total params: %.2fM' % (sum(p.numel() for p in net.parameters()) / 1000000.0))
 test()
     
