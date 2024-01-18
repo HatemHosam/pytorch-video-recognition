@@ -120,13 +120,13 @@ class ConvNeXtV2(nn.Module):
 
         self.out_indices = out_indices
 
-        norm_layer = partial(LayerNorm, eps=1e-6, data_format="channels_first")
+        norm_layer = self.norm = nn.LayerNorm(dims[-1], eps=1e-6) # final norm layer
         self.head = nn.Linear(dims[-1], num_classes)
                      
-        for i_layer in range(4):
-            layer = norm_layer(dims[i_layer])
-            layer_name = f'norm{i_layer}'
-            self.add_module(layer_name, layer)
+        #for i_layer in range(4):
+        #    layer = norm_layer(dims[i_layer])
+        #    layer_name = f'norm{i_layer}'
+        #    self.add_module(layer_name, layer)
 
         self.apply(self._init_weights)
         self.head.weight.data.mul_(head_init_scale)
@@ -146,12 +146,12 @@ class ConvNeXtV2(nn.Module):
             # print(x.size())
             x = self.stages[i](x)
             # print(x.size())
-            if i in self.out_indices:
-                norm_layer = getattr(self, f'norm{i}')
-                x_out = norm_layer(x)
-                outs.append(x_out)
+            #if i in self.out_indices:
+            #    norm_layer = getattr(self, f'norm{i}')
+            #    x_out = norm_layer(x)
+            #    outs.append(x_out)
 
-        return tuple(outs)
+        return self.norm(x.mean([-3, -2, -1])) # global average pooling, (N, C, H, W, Z) -> (N, C)
 
     def forward(self, x):
         x = self.forward_features(x)
