@@ -87,7 +87,7 @@ class ConvNeXtV2(nn.Module):
         head_init_scale (float): Init scaling value for classifier weights and biases. Default: 1.
     """
     def __init__(self, in_chans=3,  num_classes=400, depths=[2, 2, 2, 2], dims=[48, 96, 192, 384],
-                 drop_path_rate=0., layer_scale_init_value=1e-6, head_init_scale=1.):
+                 drop_path_rate=0., layer_scale_init_value=1e-6, head_init_scale=1., out_indices=[0, 1, 2, 3]):
         super().__init__()
 
         self.downsample_layers = nn.ModuleList() # stem and 3 intermediate downsampling conv layers
@@ -118,7 +118,7 @@ class ConvNeXtV2(nn.Module):
             self.stages.append(stage)
             cur += depths[i]
 
-        #self.out_indices = out_indices
+        self.out_indices = out_indices
 
         norm_layer = partial(LayerNorm, eps=1e-6, data_format="channels_first")
         self.head = nn.Linear(dims[-1], num_classes)
