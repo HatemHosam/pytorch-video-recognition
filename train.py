@@ -80,7 +80,8 @@ def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=
         print('We only implemented C3D and R2Plus1D models.')
         raise NotImplementedError
     criterion = nn.CrossEntropyLoss()  # standard crossentropy loss for classification
-    optimizer = torch.optim.Adam(model.parameters(), lr=lr,weight_decay=1e-4) #optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=5e-4)
+    #optimizer = torch.optim.Adam(model.parameters(), lr=lr,weight_decay=1e-4) #optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=5e-4)
+    optimizer = optim.SGD(train_params, lr=lr, momentum=0.9, weight_decay=5e-4)
     scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)  # the scheduler divides the lr by 10 every 10 epochs
 
     if resume_epoch == 0:
