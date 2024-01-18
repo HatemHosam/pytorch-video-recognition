@@ -159,8 +159,8 @@ class ConvNeXtV2(nn.Module):
         return x
 
 def convnext_xtiny(**kwargs):
-    model = ConvNeXtV2(depths=[2, 2, 2, 2], dims=[48, 96, 192, 384], **kwargs)
+    model = ConvNeXtV2(depths=[2, 2, 2, 2], dims=[96, 192, 384, 768], **kwargs)
     return model
 def convnext_tiny(**kwargs):
-    model = ConvNeXtV2(depths=[3, 3, 9, 3], dims=[48, 96, 192, 384], **kwargs)
+    model = ConvNeXtV2(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], **kwargs)
     return model
