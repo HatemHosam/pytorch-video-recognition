@@ -12,7 +12,7 @@ from torch.utils.data import DataLoader
 from torch.autograd import Variable
 
 from dataloaders.dataset import VideoDataset
-from network import C3D_model, R2Plus1D_model, R3D_model, ConvNext3D
+from network import C3D_model, R2Plus1D_model, R3D_model, ConvNext3D, ConvNext3Dv2
 
 # Use GPU if available else revert to CPU
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -48,7 +48,7 @@ else:
     run_id = int(runs[-1].split('_')[-1]) + 1 if runs else 0
 
 save_dir = os.path.join(save_dir_root, 'run', 'run_' + str(run_id))
-modelName = 'ConvNext' # Options: C3D or R2Plus1D or R3D
+modelName = 'ConvNextv2' # Options: C3D or R2Plus1D or R3D
 saveName = modelName + '-' + dataset
 
 def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=lr,
@@ -58,6 +58,9 @@ def train_model(dataset=dataset, save_dir=save_dir, num_classes=num_classes, lr=
             num_classes (int): Number of classes in the data
             num_epochs (int, optional): Number of epochs to train for.
     """
+    if modelName == 'ConvNextv2':
+        model = ConvNext3Dv2.convnext_xtiny()
+        
     if modelName == 'ConvNext':
         model = ConvNext3D.convnext_tiny()
         #train_params = [{'params': ConvNext3D.get_1x_lr_params(model), 'lr': lr},
